@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Fail2Rdp.helpers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -83,54 +84,39 @@ namespace Fail2Rdp
 
         private void button6_Click(object sender, EventArgs e)
         {
-            if (!File.Exists("Fail2Rdp.Service.exe"))
+            try
             {
-                MessageBox.Show("Service component is missing. Please reinstall.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                if (ServiceHelper.UninstallService())
+                    MessageBox.Show("Success", "Deinstallation complete", MessageBoxButtons.OK);
+                else
+                    MessageBox.Show("Cannot deinstall. Please check execution privileges.", "Uninstallation error", MessageBoxButtons.OK);
+
             }
-            string dotNetPath = System.Runtime.InteropServices.RuntimeEnvironment.GetRuntimeDirectory();
-            Process p = new Process();
-            p.StartInfo.FileName = "InstallUtil.exe";
-            p.StartInfo.WorkingDirectory = dotNetPath;
-            p.StartInfo.CreateNoWindow = true;
-            p.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            p.StartInfo.Arguments = "-u " + Path.Combine(Environment.CurrentDirectory, "Fail2Rdp.Service.exe");
-            p.Start();
-            p.WaitForExit();
-            if (p.ExitCode == 0)
+            catch (Exception ex)
             {
-                MessageBox.Show("Success", "Uninstall complete", MessageBoxButtons.OK);
+                MessageBox.Show(ex.Message, "Deinstallation error", MessageBoxButtons.OK);
+            }
+            finally
+            {
                 RefreshData();
-            }
-            else
-            {
-                MessageBox.Show("Cannot uninstall. Please check execution privileges.", "Uninstallation error", MessageBoxButtons.OK);
             }
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            if (!File.Exists("Fail2Rdp.Service.exe"))
+            try
             {
-                MessageBox.Show("Service component is missing. Please reinstall.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            string dotNetPath = System.Runtime.InteropServices.RuntimeEnvironment.GetRuntimeDirectory();
-            Process p = new Process();
-            p.StartInfo.FileName = "InstallUtil.exe";
-            p.StartInfo.WorkingDirectory = dotNetPath;
-            p.StartInfo.CreateNoWindow = true;
-            p.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            p.StartInfo.Arguments = Path.Combine(Environment.CurrentDirectory, "Fail2Rdp.Service.exe");
-            p.Start();
-            p.WaitForExit();
-            if (p.ExitCode == 0)
+                if (ServiceHelper.InstallService())
+                    MessageBox.Show("Success", "Installation complete", MessageBoxButtons.OK);
+                else
+                    MessageBox.Show("Cannot install. Please check execution privileges.", "Installation error", MessageBoxButtons.OK);
+
+            } catch (Exception ex)
             {
-                MessageBox.Show("Success", "Installation complete", MessageBoxButtons.OK);
+                MessageBox.Show(ex.Message, "Installation error", MessageBoxButtons.OK);
+            } finally
+            {
                 RefreshData();
-            } else
-            {
-                MessageBox.Show("Cannot install. Please check execution privileges.", "Installation error", MessageBoxButtons.OK);
             }
         }
     }
