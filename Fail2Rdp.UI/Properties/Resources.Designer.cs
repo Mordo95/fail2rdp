@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Fail2Rdp.Properties {
+namespace Fail2Rdp.UI.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Fail2Rdp.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Fail2Rdp.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Fail2Rdp.UI.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -57,6 +57,16 @@ namespace Fail2Rdp.Properties {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] materialdesignicons_webfont {
+            get {
+                object obj = ResourceManager.GetObject("materialdesignicons_webfont", resourceCulture);
+                return ((byte[])(obj));
             }
         }
     }

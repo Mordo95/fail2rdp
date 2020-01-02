@@ -33,7 +33,7 @@ namespace Fail2Rdp.Service
                 EventXml xml = ParseRecord(e.Entry);
                 var ipAddress = xml.EventData["IpAddress"];
                 var loginType = xml.EventData["LogonType"];
-                if (IPHelper.IsValidAddress(ipAddress) && loginType == "3")
+                if (IPHelper.IsValidAddress(ipAddress) && loginType == "3" && !IsWhitelisted(ipAddress))
                 {
                     if (Attempts.ContainsKey(ipAddress))
                     {
@@ -46,6 +46,9 @@ namespace Fail2Rdp.Service
                 }
             }
         }
+
+        public bool IsWhitelisted(string ip)
+            => Program.Settings.Whitelist.Contains(ip);
 
         static EventXml ParseRecord(EventLogEntry entry)
         {

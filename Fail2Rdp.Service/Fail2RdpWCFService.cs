@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,14 +22,15 @@ namespace Fail2Rdp.Service
         int GetThreshold();
         [OperationContract]
         void SetThreshold(int threshold);
-        /*[OperationContract]
-        void AddPermaBan(string ip);
-        [OperationContract]
-        void RemovePermaBan(string ip);
         [OperationContract]
         void AddWhitelist(string ip);
         [OperationContract]
-        void RemoveWhitelist(string ip);*/
+        bool RemoveWhitelist(string ip);
+        [OperationContract]
+        List<string> GetWhitelist();
+        [OperationContract]
+        string GetVersion();
+
     }
 
     public class Fail2RdpWCFService : IFail2RdpWCFService
@@ -42,6 +44,15 @@ namespace Fail2Rdp.Service
             Program.Settings.Save();
         }
 
+        public void AddWhitelist(string ip)
+        {
+            if (!IPHelper.IsValidAddress(ip))
+                return;
+            Program.Settings.Whitelist.Add(ip);
+            FirewallHelper.RemoveFirewallRule(ip);
+            Program.Settings.Save();
+        }
+
         public List<string> GetBans()
         {
             return Program.Settings.Bans;
@@ -52,12 +63,31 @@ namespace Fail2Rdp.Service
             return Program.Settings.Threshold;
         }
 
+        public string GetVersion()
+        {
+            return Assembly.GetExecutingAssembly().GetName().Version.ToString();
+        }
+
+        public List<string> GetWhitelist()
+        {
+            return Program.Settings.Whitelist;
+        }
+
         public bool RemoveBan(string ip)
         {
             if (!IPHelper.IsValidAddress(ip))
                 return false;
             bool success = Program.Settings.Bans.Remove(ip);
             FirewallHelper.RemoveFirewallRule(ip);
+            Program.Settings.Save();
+            return success;
+        }
+
+        public bool RemoveWhitelist(string ip)
+        {
+            if (!IPHelper.IsValidAddress(ip))
+                return false;
+            bool success = Program.Settings.Whitelist.Remove(ip);
             Program.Settings.Save();
             return success;
         }

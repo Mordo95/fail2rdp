@@ -13,6 +13,7 @@ namespace Fail2Rdp.Service
     {
         public List<string> Bans { get; set; } = new List<string>();
         public int Threshold { get; set; } = 3;
+        public List<string> Whitelist { get; set; } = new List<string>();
 
         public void Save()
         {

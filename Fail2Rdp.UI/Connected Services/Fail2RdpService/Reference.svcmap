@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="0362498e-cdcc-4c75-9031-0ad3c6f8f9c3" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:8000/Fail2Rdp/service/mex" Protocol="mex" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="Fail2Rdp.Service.wsdl" MetadataType="Wsdl" ID="df65900a-9570-4211-bbe8-fc4d15326c0c" SourceId="1" SourceUrl="http://localhost:8000/Fail2Rdp/service/mex" />
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="0cc472ff-6f23-444b-ae43-2bf29f5a9a63" SourceId="1" SourceUrl="http://localhost:8000/Fail2Rdp/service/mex" />
+    <MetadataFile FileName="Fail2Rdp.Service.xsd" MetadataType="Schema" ID="f3f8a242-5731-46d6-9416-16b9177aa27e" SourceId="1" SourceUrl="http://localhost:8000/Fail2Rdp/service/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="7b96ab2c-9282-4dab-848e-8b1e82d2663f" SourceId="1" SourceUrl="http://localhost:8000/Fail2Rdp/service/mex" />
+    <MetadataFile FileName="Arrays.xsd" MetadataType="Schema" ID="b5fc2c30-5caf-42be-88b9-b43b5d19652e" SourceId="1" SourceUrl="http://localhost:8000/Fail2Rdp/service/mex" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
